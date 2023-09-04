@@ -127,30 +127,50 @@ app.use(
         _id:ID!
         firstName:String!
         lastName:String!
-        gender:String!
         email:String!
-        phone:Float!
+        phone_number_country:String!
+        phone_number_country_code:Int!
+        phone_number:Float!
+        gender:String!
         profile:String!
-        home:String!
-        work:String!
-        morePlaces:[String!]
-        pastActivities:[String!]
-        upComingActivites:[String!]
+        home_address:String!
+        work_address:String!
+        more_address:[String!]
+        past_activities:[String!]
+        upcoming_activites:[String!]
+        latitude_home_address:Float!
+        longitude_home_address:Float!
+        latitude_work_address:Float!
+        longitude_work_address:Float!
+        otp:Int!
+        otp_expiry:String!
+        verify_token:String!
+        customer_type:[String!]
         rated:Boolean!
     }
     input UserInput{
-        firstName:String!
-        lastName:String!
-        gender:String!
-        email:String!
-        phone:Float!
-        profile:String!
-        home:String!
-        work:String!
-        morePlaces:[String!]
-        pastActivities:[String!]
-        upComingActivites:[String!]
-        rated:Boolean!
+      firstName:String!
+      lastName:String!
+      email:String!
+      phone_number_country:String!
+      phone_number_country_code:Int!
+      phone_number:Float!
+      gender:String!
+      profile:String!
+      home_address:String!
+      work_address:String!
+      more_address:[String!]
+      past_activities:[String!]
+      upcoming_activites:[String!]
+      latitude_home_address:Float!
+      longitude_home_address:Float!
+      latitude_work_address:Float!
+      longitude_work_address:Float!
+      otp:Int!
+      otp_expiry:String!
+      verify_token:String!
+      customer_type:[String!]
+      rating:Boolean!
     }
 
     type RootQuery {
@@ -185,16 +205,28 @@ app.use(
           //   _id: Math.random().toString(),
           firstName: args.userInput.firstName,
           lastName: args.userInput.lastName,
-          gender: args.userInput.gender,
           email: args.userInput.email,
-          phone: Number(args.userInput.phone),
+          phone_number_country: args.userInput.phone_number_country,
+          phone_number_country_code: Number(
+            args.userInput.phone_number_country_code
+          ),
+          phone_number: Number(args.userInput.phone_number),
+          gender: args.userInput.gender,
           profile: args.userInput.profile,
-          home: args.userInput.home,
-          work: args.userInput.work,
-          morePlaces: args.userInput.morePlaces,
-          pastActivities: args.userInput.pastActivities,
-          upComingActivites: args.userInput.upComingActivites,
-          rated: args.userInput.rated,
+          home_address: args.userInput.home_address,
+          work_address: args.userInput.work_address,
+          more_address: args.userInput.more_address,
+          past_activities: args.userInput.past_activities,
+          upcoming_activites: args.userInput.upcoming_activites,
+          latitude_home_address: args.userInput.latitude_home_address,
+          longitude_home_address: args.userInput.longitude_home_address,
+          latitude_work_address: args.userInput.latitude_work_address,
+          longitude_work_address: args.userInput.longitude_work_address,
+          otp: Number(args.userInput.otp),
+          otp_expiry: args.userInput.otp_expiry,
+          verify_token: args.userInput.verify_token,
+          customer_type: args.userInput.customer_type,
+          rating: args.userInput.rating,
         });
         return user
           .save()
@@ -222,3 +254,10 @@ app.listen(3000, () => {
 //       email
 //     }
 //   }
+
+// mutation query to add the user data
+// mutation {
+//   createUser(userInput:{firstName:"Rahul",lastName:"Saroj",email:"ankit@gmail.com",phone_number_country:"India",phone_number_country_code:91,phone_number:8928116000,gender:"male",profile:"https:www.aws.com",home_address:"Malad Mumbai Maharashtra", work_address:"kandivali Mumbai Maharashtra",more_address:["Andheri Mumbai Maharashtra","Goregaon Mumbai Maharashtra"],past_activities:["Goa", "Great Escape"], upcoming_activites:["water kingdom","imagica"],latitude_home_address:121, longitude_home_address:135, latitude_work_address:211, longitude_work_address:321,otp:1234,otp_expiry:"123456",verify_token:"xpppsjsju122",customer_type:["android","ios"],rating:true}){
+//     more_address
+//   }
+// }

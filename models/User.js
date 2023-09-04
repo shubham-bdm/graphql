@@ -9,29 +9,34 @@ const userSchema = Schema({
     type: String,
     required: true,
   },
-  gender: {
-    type: String,
-    required: true,
-  },
   email: {
     type: String,
     required: true,
   },
-  phone: {
+  phone_number_country: {
+    type: String,
+  },
+  phone_number_country_code: {
+    type: Number,
+  },
+  phone_number: {
     type: Number,
     required: true,
+  },
+  gender: {
+    type: String,
   },
   profile: {
     type: String,
     default: "",
   },
-  home: {
+  home_address: {
     type: String,
   },
-  work: {
+  work_address: {
     type: String,
   },
-  morePlaces: [
+  more_address: [
     {
       type: String,
     },
@@ -47,17 +52,39 @@ const userSchema = Schema({
   //       ],
   //     },
   //   ],
-  pastActivities: [
+  past_activities: [
     {
       type: String,
     },
   ],
-  upComingActivites: [
+  upcoming_activites: [
     {
       type: String,
     },
   ],
-  rated: {
+  latitude_home_address: {
+    type: Number,
+  },
+  longitude_home_address: {
+    type: Number,
+  },
+  latitude_work_address: {
+    type: Number,
+  },
+  longitude_work_address: {
+    type: Number,
+  },
+  otp: {
+    type: Number,
+  },
+  otp_expiry: {
+    type: Number,
+  },
+  verify_token: {
+    type: String,
+  },
+  customer_type: [{ type: String }],
+  rating: {
     type: Boolean,
   },
 });
