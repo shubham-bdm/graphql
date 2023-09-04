@@ -148,6 +148,9 @@ app.use(
         customer_type:[String!]
         rated:Boolean!
     }
+    type Validate{
+      phone_number:Float!
+    }
     input UserInput{
       firstName:String!
       lastName:String!
@@ -176,6 +179,7 @@ app.use(
     type RootQuery {
    
         users:[User!]!
+        validate(num:Float!):Float!
     }
     type RootMutation {
       
@@ -189,14 +193,21 @@ app.use(
     rootValue: {
       users: () => {
         return User.find()
-          .then((users) =>
-            users.map((user) => {
-              return user;
-            })
-          )
+          .then((users) => users)
           .catch((err) => {
             throw err;
           });
+      },
+      validate: async (args) => {
+        let value = args.num;
+        let otp = null;
+        try {
+          const users = await User.find({ phone_number: value }, { otp: 1 });
+          otp = users[0].otp;
+        } catch (error) {
+          console.log("User Not Found", error);
+        }
+        return parseFloat(otp);
       },
 
       //here what happened in this promises is first we are checking whether the user is already exits, if it already exists then we will thro an error which will take us to the catch block otherwise first we will bcrypt the code then we will create a user object and then we will save to the database and we will return that object because in resolver we have to always return something.
